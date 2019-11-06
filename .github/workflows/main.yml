@@ -1,0 +1,24 @@
+# リファレンス
+# https://help.github.com/ja/github/automating-your-workflow-with-github-actions
+name: CI
+
+# ワークフローがトリガーされるイベントを指定
+# https://help.github.com/ja/github/automating-your-workflow-with-github-actions/events-that-trigger-workflows
+on: [push]
+
+env:
+  GLOBAL_ENV: hoge
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run a multi-line script
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
