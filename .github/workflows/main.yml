@@ -4,21 +4,55 @@ name: CI
 
 # ワークフローがトリガーされるイベントを指定
 # https://help.github.com/ja/github/automating-your-workflow-with-github-actions/events-that-trigger-workflows
-on: [push]
+on:
+  push:
+    branches: 
+      - master
+  schedule:
+    # UTCで指定する
+    # https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#onschedule
+    - cron: '30 18 * * *'
 
+# このワークフロー全体で使える環境変数を定義
+# https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#env
 env:
   GLOBAL_ENV: hoge
 
+# ジョブを定義する
+# https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#jobs
 jobs:
-  build:
-
+  job1:
+    # ジョブを実行する仮想環境を指定
+    # https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#jobsjob_idruns-on
     runs-on: ubuntu-latest
 
+    # ジョブで実行する処理（ステップと呼ばれる）を定義する
+    # https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#jobsjob_idsteps
     steps:
+
+    # 当該リポジトリをチェックアウトする。
+    # https://github.com/actions/checkout
     - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1 # git の --depth 1 と同じ
+
     - name: Run a one-line script
       run: echo Hello, world!
     - name: Run a multi-line script
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+
+  job2:
+    # ジョブの依存関係を定義
+    # この場合、job1 が正常終了すると job2 が実行される
+    # https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#jobsjob_idneeds
+    needs: [job1]
+    
+    strategy:
+      matrix:
+        os: [windows-latest, macOS-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v1
