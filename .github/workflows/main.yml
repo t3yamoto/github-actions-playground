@@ -24,6 +24,8 @@ jobs:
   job1:
     # ジョブを実行する仮想環境を指定
     # https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    # 仮想環境にインストール済みのソフトウェア
+    # https://help.github.com/ja/actions/automating-your-workflow-with-github-actions/software-installed-on-github-hosted-runners
     runs-on: ubuntu-latest
 
     # ジョブで実行する処理（ステップと呼ばれる）を定義する
