@@ -9,6 +9,8 @@ jobs:
     steps:
       - run: which go
       - run: go version
-      - run: go install golang.org/dl/go1.20.11@latest
-      - run: go1.20.11 download
-      - run: go1.20.11 version
+      - run: |
+         rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.6.linux-amd64.tar.gz
+      - run: go version
+      
+
