@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: cat /etc/os-release
+      - run: grep -q 'Name="Ubuntu"' /etc/os-release
       - run: pwd
       - run: whoami
       - run: env
