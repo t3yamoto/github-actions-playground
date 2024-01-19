@@ -16,6 +16,7 @@ jobs:
       # - run: rm -rf /usr/local/go
       - run: sudo rm -f /usr/bin/go
       - run: sudo tar -C /usr/local -xzf go1.21.6.linux-amd64.tar.gz
+      - run: ls -la /usr/local/go
       - run: export PATH=$PATH:/usr/local/go/bin
       - run: source $HOME/.profile
       - run: go version
