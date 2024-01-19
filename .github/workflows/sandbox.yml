@@ -7,6 +7,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - run: cat /etc/os-release
       - run: pwd
       - run: whoami
       - run: env
