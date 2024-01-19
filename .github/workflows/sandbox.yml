@@ -7,6 +7,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - run: pwd
+      - run: whoami
       - run: which go
       - run: go version
       - run: wget https://go.dev/dl/go1.21.6.linux-amd64.tar.gz
