@@ -1,0 +1,9 @@
+name: skip
+on:
+  workflow_dispatch:
+jobs:
+  s:
+    if: ${{ github.actor == 'octocat' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo hello
